@@ -35,7 +35,7 @@ h.se = sqrt(diag(var)) / sum(mq$m)
 e.est = h.est / (mq$m/mq$m[1])
 e.se = h.se / (mq$m/mq$m[1])
 
-cbind(ng, h.est[-1], h.se[-1], e.est[-1], e.se[-1])
+cbind(h.est, h.se, e.est, e.se)
 
 
 ```
