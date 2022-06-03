@@ -20,11 +20,13 @@ d = cbind(0, d[,-1])
 d[scnt==0, 1] = 1
 
 sw = as.matrix(d)
-
 nsnp = nrow(sw)
 
+# trait name
+trait = "HDL.norm"
+
 # MPH output
-mq = read.csv("LDL_ADJ.norm.mq.vc.csv")
+mq = read.csv(paste(trait,"mq.vc.csv",sep="."))
 mq = mq[-nrow(mq),]
 
 # heritability estimate
@@ -48,7 +50,7 @@ p<- ggplot(df, aes(x=FunctionalAnnotation, y=Enrichment)) +
   geom_errorbar(aes(ymin=Enrichment-SE, ymax=Enrichment+SE), width=.2,
                  position=position_dodge(.9)) 
 p<- p + theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
-p<- p+ geom_hline(yintercept=1, linetype="dashed", color = "red") + xlab("") + ggtitle("LDL_ADJ.norm")
+p<- p+ geom_hline(yintercept=1, linetype="dashed", color = "red") + xlab("") + ggtitle(trait)
 print(p)
 dev.off()
 
