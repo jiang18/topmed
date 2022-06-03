@@ -21,6 +21,8 @@ d[scnt==0, 1] = 1
 
 sw = as.matrix(d)
 
+nsnp = nrow(sw)
+
 # MPH output
 mq = read.csv("LDL_ADJ.norm.mq.vc.csv")
 mq = mq[-nrow(mq),]
@@ -32,8 +34,8 @@ h.est = lhs %*% mq$enrichment / sum(mq$m)
 h.se = sqrt(diag(var)) / sum(mq$m) 
 
 # enrichment estimate
-e.est = h.est / (mq$m/mq$m[1])
-e.se = h.se / (mq$m/mq$m[1])
+e.est = h.est / (mq$m/nsnp)
+e.se = h.se / (mq$m/nsnp)
 
 cbind(h.est, h.se, e.est, e.se)
 
