@@ -38,6 +38,18 @@ e.est = h.est / (mq$m/nsnp)
 e.se = h.se / (mq$m/nsnp)
 
 cbind(h.est, h.se, e.est, e.se)
+ee = cbind(e.est[-1], e.se[-1])
+df = data.frame(FunctionalAnnotation=rownames(ee), Enrichment=ee[,1], SE=ee[,2])
 
+library(ggplot2)
+p<- ggplot(df, aes(x=FunctionalAnnotation, y=Enrichment)) + 
+  geom_bar(stat="identity", color="black", 
+           position=position_dodge()) +
+  geom_errorbar(aes(ymin=Enrichment-SE, ymax=Enrichment+SE), width=.2,
+                 position=position_dodge(.9)) 
+p<- p + theme(axis.text.x = element_text(angle = 60, vjust = 1, hjust=1))
+p<- p+ geom_hline(yintercept=1, linetype="dashed", color = "red") + xlab("") + ggtitle("LDL_ADJ.norm")
+print(p)
+dev.off()
 
 ```
