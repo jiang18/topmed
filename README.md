@@ -15,9 +15,8 @@ library(data.table)
 d = fread("../funct.snp_info.csv", sep=",", head=T)
 d = d[,!grepl("extend", colnames(d)), with=F]
 d[is.na(d)] = 0
-fcnt = apply(d[,2:ncol(d)], 2, sum)
-scnt = apply(d[,2:ncol(d)], 1, sum)
-d[,1] = 0
+scnt = apply(d[,-1], 1, sum)
+d = cbind(0, d[,-1])
 d[scnt==0, 1] = 1
 
 sw = as.matrix(d)
