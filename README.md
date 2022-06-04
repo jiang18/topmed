@@ -54,4 +54,7 @@ p<- p+ geom_hline(yintercept=1, linetype="dashed", color = "red") + xlab("") + g
 print(p)
 dev.off()
 
+z = (e.est-1)/e.se
+pnorm(z, lower=F)
+
 ```
